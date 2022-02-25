@@ -6,7 +6,7 @@
 - *Nombres y Apellidos:* María Antonella Ortiz Báez
 - *Correo electrónico:* maria.ortiz@est.ikiam.edu.ec
 
-#Programas utilizados
+# Programas utilizados
 1. Anaconda3 2021.05 (Python 3.8.8 64-bit) para ejecutar Jupyter Notebook 6.3.0
 2. Atom 1.58.0
 
