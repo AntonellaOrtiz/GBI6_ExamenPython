@@ -1,41 +1,38 @@
-def download_pubmed (keyword):
-    """
-    Funcion que sirve para buscar y nos da como resultado los ID de busqueda en pubmed
-    """
+def download_pubmed(keyword):
+    """ Función que extrae listado de artículos desde pubmed a traves de un keyword entre comillas"""
     from Bio import Entrez
-    from Bio import SeqIO
-    from Bio import GenBank 
-    Entrez.email = 'maria.ortiz@est.ikiam.edu.ec'
-    handle = Entrez.esearch(db='pubmed',
-                        sort='relevance',
-                        retmax='200',
-                        retmode='xml',
-                        term=keyword)
-    results = Entrez.read(handle)
-    id_list = results["IdList"]
-    ids = ','.join(id_list)
-    Entrez.email = 'maria.ortiz@est.ikiam.edu.ec'
-    handle = Entrez.efetch(db='pubmed',
-                       retmode='xml',
-                       id=ids)
-    lista_id = ids.split(",")
-    return (lista_id) 
+    Entrez.email = "maria.ortiz@est.ikiam.edu.ec"
+    datos=Entrez.read(Entrez.esearch(db="pubmed",
+                                    term=keyword,
+                                    usehistory="y"))
+    webenv=datos["WebEnv"]
+    query_key=datos["QueryKey"]
+    hand1=Entrez.efetch(db="pubmed",
+                        rettype="medline",
+                        retmode="text",
+                        retstart=0,
+                        retmax=543, webenv=webenv, query_key=query_key)
+    out_hand1 = open(keyword+".txt", "w")
+    a=hand1.read()
+    out_hand1.write(a)
+    out_hand1.close()
+    han1.close()
+    return a
 
-
-##función mining_pubs 
-import csv 
-import re
-import pandas as pd 
-from collections import Counter
-
-def mining_pubs(tipo):
+def mining_pubs(tipo, archivo):
     """
-    Se utiliza re.findall para para que se imprima la lista, asi como se da entrada a las variables: DA, AU y AD 
+    Función que pide como entrada "DP", "AU" y "AD". Si coloca "DP" = PMID + DP_year, "AU" = num_auth por PMID, y  "AD" = dataframe con el country y el num_auth. Un segundo argumento que corresponde al keyword para la descarga de archivos con download pubmed
     """
-    with open("pubmed-EcuadorGen-set.txt", errors="ignore") as f: 
-        texto = f.read() 
+    import csv
+    import re
+    import pandas as pd
+    from collections import Counter
+    with open(archivo+".txt", error="ignore")as f:
+        texto = f.read()
     if tipo == "DP":
-        PMID = re.findall("PMID- (\d*)", texto) 
+        PMID = re.findall("PMID-\s\d{8}", texto)
+        PMID = "".join(PMID)
+        PMID = PMID.split("PMID- ")
         year = re.findall("DP\s{2}-\s(\d{4})", texto)
         pmid_y = pd.DataFrame()
         pmid_y["PMID"] = PMID
