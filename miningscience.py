@@ -1,23 +1,24 @@
 def download_pubmed(keyword):
-    """ Función que extrae listado de artículos desde pubmed a traves de un keyword entre comillas"""
+    """ Función que extrae listado de artículos desde pubmed a traves de un keyword entre comillas """
     from Bio import Entrez
     Entrez.email = "maria.ortiz@est.ikiam.edu.ec"
-    datos=Entrez.read(Entrez.esearch(db="pubmed",
-                                    term=keyword,
-                                    usehistory="y"))
-    webenv=datos["WebEnv"]
-    query_key=datos["QueryKey"]
+    Entr=Entrez.read(Entrez.esearch(db="pubmed",
+                        term= keyword,
+                        usehistory="y"))
+    
+    webenv=Entr["WebEnv"]
+    query_key=Entr["QueryKey"]
     hand1=Entrez.efetch(db="pubmed",
-                        rettype="medline",
-                        retmode="text",
-                        retstart=0,
-                        retmax=543, webenv=webenv, query_key=query_key)
+                      rettype='medline',
+                      retmode="text",
+                      retstart=0,
+                      retmax=543, webenv=webenv, query_key=query_key)
     out_hand1 = open(keyword+".txt", "w")
-    a=hand1.read()
-    out_hand1.write(a)
+    m=hand1.read()
+    out_hand1.write(m)
     out_hand1.close()
-    han1.close()
-    return a
+    hand1.close()
+    return m
 
 def mining_pubs(tipo, archivo):
     """
@@ -27,7 +28,7 @@ def mining_pubs(tipo, archivo):
     import re
     import pandas as pd
     from collections import Counter
-    with open(archivo+".txt", error="ignore")as f:
+    with open(archivo+".txt", errors="ignore")as f:
         texto = f.read()
     if tipo == "DP":
         PMID = re.findall("PMID-\s\d{8}", texto)
