@@ -10,6 +10,10 @@
 1. Anaconda3 2021.05 (Python 3.8.8 64-bit) para ejecutar Jupyter Notebook 6.3.0
 2. Atom 1.58.0
 
+# Explicación de la data utilizada
+- Data de Pubmed sobre publicaciones de datos géneticos en Ecuador
+- Data de NCBI Nucleotide sobre las secuencias de genes de interés
+
 > Especificaciones de mi dispositivo: 
 > - Edición de Windows: Windows 11 Home
 > - Procesador: Intel(R) Core(TM) i5-8250U
