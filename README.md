@@ -11,8 +11,7 @@
 2. Atom 1.58.0
 
 # Explicación de la data utilizada
-- Data de Pubmed sobre publicaciones de datos géneticos en Ecuador
-- Data de NCBI Nucleotide sobre las secuencias de genes de interés
+
 
 > Especificaciones de mi dispositivo: 
 > - Edición de Windows: Windows 11 Home
